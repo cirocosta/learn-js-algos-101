@@ -15,8 +15,8 @@
  * @return {Array}   the array created.
  */
 function generateRangeArray(N) {
-    var result = [];
-    for (var i in N) {
+    var result = [], i = 0;
+    for (i; i < N; i += 1) {
         result.push(i);
     }
     return result;
