@@ -33,7 +33,7 @@ QuickFind.prototype.union = function (p, q) {
             this.list[i] = q;
         }
     }
-    console.log(this.list);
+    // console.log(this.list);
 };
 
 /**

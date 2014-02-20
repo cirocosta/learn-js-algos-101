@@ -6,7 +6,8 @@
  */
 var tests = [
     require('./test-file-line-reader'),
-    require('./test-union-find')
+    require('./test-union-find'),
+    require('./test-quick-union')
 ];
 
 /**

@@ -52,7 +52,7 @@ module.exports = (function () {
 
                     while (flr.hasNextLine()) {
                         var values = flr.nextLine().split(" ");
-                        console.log(values);
+                        // console.log(values);
                         if (!qf.connected(values[0], values[1])) {
                             qf.union(values[0], values[1]);
                         }
