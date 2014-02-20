@@ -1,2 +1,3 @@
-js-algos-101
-============
+# JS Algorithms 101
+
+> JavaScript implementation of some well known algorithms
