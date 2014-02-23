@@ -1,0 +1,32 @@
+{
+  "name": "js-algos-101",
+  "version": "0.0.1",
+  "description": "Implementation in pure js of some algos that we learn on algos 101",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cirocosta/js-algos-101.git"
+  },
+  "keywords": [
+    "algorithms",
+    "javascript"
+  ],
+  "author": "Ciro S. Costa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cirocosta/js-algos-101/issues"
+  },
+  "homepage": "https://github.com/cirocosta/js-algos-101",
+  "devDependencies": {
+    "gulp": "~3.5",
+    "gulp-util":"~2.2",
+    "gulp-watch": "~0.5",
+    "gulp-mocha": "~0.4",
+    "gulp-jshint": "~1.4"
+  }
+}

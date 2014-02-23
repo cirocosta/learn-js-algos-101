@@ -1,3 +1,5 @@
+/* jshint -W097 */
+/*global module:false*/
 'use strict';
 
 /**The DataStructure:

@@ -1,17 +1,11 @@
 'use strict';
-
 var assert = require('assert');
 var FileLineReader = require('../utils/file-line-reader');
 
-/**
- * Tests for the utils/file-line-reader.js script.
- * This intends also to represent its funcionality.
- */
-module.exports = (function () {
+describe('Testing Utils', function () {
 
-    return {
-        name: "TestFileLineReader",
-        fn: function () {
+    describe('TestFileLineReader', function () {
+        it('should read only the first line', function () {
 
             var SAMPLE_FILENAME = __dirname + '/samples/1.txt',
                 flr;
@@ -26,7 +20,7 @@ module.exports = (function () {
             assert.equal(true, !!flr.hasNextLine());
             assert.equal("1", flr.nextLine());
             flr.close();
-        },
-    }
+        });
+    });
 
-})();
+});
