@@ -4,45 +4,6 @@ var assert = require('assert');
 
 describe('Testing Dynamic Connectivity', function () {
 
-    describe('Quick Union', function () {
-
-        var QuickUnion = require('../src/0-dynamic-connectivity/quick-union')
-
-        it('should generate from int', function () {
-            var qu = new QuickUnion(20);
-            assert.equal(qu.list.length, 20);
-        });
-
-        it('should generate from list', function () {
-            var qu = new QuickUnion([1, 2, 3, 4, 5]);
-            assert.equal(qu.list.length, 5);
-        });
-
-        it('should perform simple union', function () {
-            var qu = new QuickUnion(10);
-            assert.equal(qu.list.length, 10);
-
-            qu.union(4,5);
-            qu.union(5,6);
-
-            assert.equal(qu.connected(4,6), true);
-        });
-
-        it('should iterate well over defined list', function () {
-            var list = [0, 9, 6, 5, 4, 2, 6, 1, 0, 5];
-            var qu = new QuickUnion(list);
-
-            assert.equal(qu.getRoot(0), 0);
-            assert.equal(qu.getRoot(2), 6);
-            assert.equal(qu.getRoot(5), 6);
-            assert.equal(qu.connected(5, 8), false);
-            assert.equal(qu.connected(3, 9), true);
-
-            qu.union(5, 8);
-            assert.equal(qu.connected(5, 8), true);
-        });
-    });
-
     describe('Quick Find', function () {
 
         var QuickFind = require('../src/0-dynamic-connectivity/quick-find');
@@ -88,6 +49,59 @@ describe('Testing Dynamic Connectivity', function () {
             assert.equal(qf.connected(0, 3), true);
         });
 
+    });
+
+    describe('Quick Union', function () {
+
+        var QuickUnion = require('../src/0-dynamic-connectivity/quick-union')
+
+        it('should generate from int', function () {
+            var qu = new QuickUnion(20);
+            assert.equal(qu.list.length, 20);
+        });
+
+        it('should generate from list', function () {
+            var qu = new QuickUnion([1, 2, 3, 4, 5]);
+            assert.equal(qu.list.length, 5);
+        });
+
+        it('should perform simple union', function () {
+            var qu = new QuickUnion(10);
+            assert.equal(qu.list.length, 10);
+
+            qu.union(4,5);
+            qu.union(5,6);
+
+            assert.equal(qu.connected(4,6), true);
+        });
+
+        it('should iterate well over defined list', function () {
+            var list = [0, 9, 6, 5, 4, 2, 6, 1, 0, 5];
+            var qu = new QuickUnion(list);
+
+            assert.equal(qu.getRoot(0), 0);
+            assert.equal(qu.getRoot(2), 6);
+            assert.equal(qu.getRoot(5), 6);
+            assert.equal(qu.connected(5, 8), false);
+            assert.equal(qu.connected(3, 9), true);
+
+            qu.union(5, 8);
+            assert.equal(qu.connected(5, 8), true);
+        });
+    });
+
+    describe('Weighted Quick Union', function () {
+        var WeightedQuickUnion = require(
+            '../src/0-dynamic-connectivity/weighted-quick-union');
+
+        it("should connect", function () {
+            var wqu = new WeightedQuickUnion(10);
+
+            assert.equal(wqu.list.length, 10);
+
+            wqu.union(4,3);
+            assert.equal(wqu.connected(4,3), true);
+        });
     });
 
 });

@@ -11,8 +11,7 @@
  */
 
 function generateRangeList(N) {
-    var result = [],
-        i = 0;
+    var result = [], i = 0;
     for (i; i < N; i += 1) {
         result.push(i);
     }

@@ -6,7 +6,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "test"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",

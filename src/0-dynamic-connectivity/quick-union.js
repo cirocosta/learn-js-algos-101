@@ -11,18 +11,6 @@
  * another (union).
  */
 
-/**
- * Creates an array similar to python's range(N) function.
- * @param  {Number} N length
- * @return {Array}   the array created.
- */
-function generateRangeArray(N) {
-    var result = [], i = 0;
-    for (i; i < N; i += 1) {
-        result.push(i);
-    }
-    return result;
-}
 
 /**
  * QuickUnion algo implementation.
@@ -31,10 +19,24 @@ function generateRangeArray(N) {
  */
 function QuickUnion(list_or_number) {
     if (typeof(list_or_number) === 'number') {
-        this.list = generateRangeArray(list_or_number);
+        this.list = this.generateRangeArray(list_or_number);
     } else {
         this.list = list_or_number;
     }
+}
+
+
+/**
+ * Creates an array similar to python's range(N) function.
+ * @param  {Number} N length
+ * @return {Array}   the array created.
+ */
+QuickUnion.prototype.generateRangeArray = function (N) {
+    var result = [], i = 0;
+    for (i; i < N; i += 1) {
+        result.push(i);
+    }
+    return result;
 }
 
 /**
@@ -57,6 +59,9 @@ QuickUnion.prototype.connected = function (p, q) {
  * Merges the path of two elements.
  */
 QuickUnion.prototype.union = function (p, q) {
+    // this.list[i] maps I to the parent, list[I]. So, when we say
+    // list[root(p)] = q, we are saying that the root of the P now has Q
+    // as parent.
     this.list[this.getRoot(p)] = q;
 };
 
