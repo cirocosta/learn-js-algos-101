@@ -37,7 +37,7 @@ QuickUnion.prototype.generateRangeArray = function (N) {
         result.push(i);
     }
     return result;
-}
+};
 
 /**
  * Walks through the tree that the node is contained and finds its root.
