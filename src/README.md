@@ -59,3 +59,12 @@ Ao analisarmos os algorítimos, o que realmente irá importar para nós é a **o
 Este então será o parâmetro para determinarmos qual algorítimo é mais eficiente que outro em uma comparação: o seu grau de crescimento.
 
 ### Merge Sort
+
+Trata-se de outro algorítimo de ordenação, porém, neste caso, utilizando uma abordagem bem diferente: dividar para conquistar. Suas etapas são:
+
+1.  Dividar o problema em diversos subproblemas similares ao original à problemas de tamanhos menores e mais simples;
+
+2.  resolver os subproblemas mais simples de maneira recursiva (o problema base é suficientemente simples para ser resolvido por exaustão);
+
+3.  combinar as solução para então reduzir à solução do problema original.
+
