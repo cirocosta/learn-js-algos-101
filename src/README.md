@@ -89,3 +89,9 @@ No caso específico do merge sort, temos então os passos:
 
 3.  juntar as duas subsequências ordenadas para então produzir a solũção do problema original.
 
+## Algorítimos Para Grafos
+
+Ao realizarmos buscas em grafos seguimos sistematicamente os ramos de um grafo de modo a visitar seus nós, podendo então descobrir características a respeito de sua estrutura. Os algorítimos de busca são o cerne no campo de algorítimo para grafos.
+
+A questão que podemos levantar então é: como representar um grafo? Uma maneira bastante simples é com listas/matrizes de adjacências.
+
