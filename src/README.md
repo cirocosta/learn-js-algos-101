@@ -95,3 +95,19 @@ Ao realizarmos buscas em grafos seguimos sistematicamente os ramos de um grafo d
 
 A questão que podemos levantar então é: como representar um grafo? Uma maneira bastante simples é com listas/matrizes de adjacências.
 
+Uma grafo é denotado por dois elementos: o número de vértices (V) e arestas (E). Ao representarmos por meio de um conjunto de listas de adjacências temos uma tabela ADJ de |V| listas, i.e, uma para cada vértice V.
+
+-   Se *G = (V,E)* é direcionado, a soma dos comprimentos de todas as listas de adjacências será *|E|* já que um ramo da forma *(u,v)* é representado de maneira que *v* aparece em ADJ[U];
+
+-   Se *G = (V,E)* não é direcionado, a soma dos comprimentos é *2|E|* já que, se *(u,v)* é um ramo do grafo, então *u* aparece na lista de adjacências de *v* e vice-versa.
+
+**//TODO termianr...**
+
+
+### Breadth-First Search (BFS) - Busca em largura
+
+Seja *G = (V,E)* um grafo, direcionado ou não, e um vértice fonte *s*. O algorítimo então explora os ramos de *G* para descobrir cada vértica que é alcançável a partir do *s* definido. À medida que percorre o grafo é calculada a distância de *s* a cada um dos vértices alcançáveis, além de gerar uma árvore *breadth-first* com raíz *s* que possui todos os vértices alcançáveis.
+
+Dada a descrição, pode-se então subentender um problema que o algorítimo possa resolver: descobrir se há um fim alcançável a partir de um início em um túnel e qual o menor caminho até o fim caso exista.
+
+Chama-se de BFS pois expande uniformemente a fronteira entre os vértices descobertos e os ainda não descobertos ao longo da largura da fronteira, i.e, descobre todos os vértices à distância *k* de *s* antes de descobrir qualquer outro à distância *k+1*.
