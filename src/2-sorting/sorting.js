@@ -94,7 +94,7 @@ Sorting.prototype.insertionSort = function(lista) {
     return list;
 };
 
-Sorting.prototype.shellSOrt = function () {
+Sorting.prototype.shellSort = function () {
 
 };
 
@@ -105,27 +105,23 @@ Sorting.prototype.shellSOrt = function () {
  */
 Sorting.prototype.merge = function(a, lo, mid, hi) {
 
-    // not running as it should.
+    var A = a.slice(lo, mid),
+        B = a.slice(mid, hi);
 
-    var i = lo, j = mid + 1, aux = [], k;
-
-    for (k = lo; k < hi; k++) {
-        aux[k] = a[k];
+    if (hi === 1) {
+        return a;
     }
 
-    for(k = lo; k < hi; k++) {
-        if (i > mid) {          // exausted the left side
-            a[k] = aux[j++];
-        } else if (j > hi) {    // exausted the right side
-            a[k] = aux[i++];
-        } else if (aux[j] < aux[i]) { // right key is less than left
-            a[k] = aux[j++];
-        } else {
-            a[k] = aux[i++];
-        }
+    var i = 0,
+        j = 0,
+        k = 0,
+        C = [];
+
+    for (k; k < hi; k++) {
+        C.push((A[i] < B[j]) ? A[i++] : B[j++]);
     }
 
-    return a;
+    return C;
 };
 
 Sorting.prototype.mergeSort = function (a) {

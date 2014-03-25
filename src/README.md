@@ -1,6 +1,10 @@
 # Algorítimo Em Automação
 
-Algorítimo trata-se de um procedimento sequencial que toma um conjunto de valores como entrada e produz um outro conjunto de valores como saída. Trata-se de um procedimento computacional para se conseguir a relação entrada-saída de um problema enunciado.
+> Algorítimo trata-se de um procedimento sequencial que toma um conjunto de valores como entrada e produz um outro conjunto de valores como saída. Trata-se de um procedimento computacional para se conseguir a relação entrada-saída de um problema enunciado.
+
+O que é muito interessante no estudo de algorítimos é que mesmo que certos algorítimos sejam destinados a resolver um determinado problema, sua eficiência pode divergir tremendamente, podendo ser muito mais significativo do que um hardware mais avançado.
+
+Estudaremos então alguns em especial.
 
 ## Ordenação
 
@@ -58,6 +62,14 @@ Ao analisarmos os algorítimos, o que realmente irá importar para nós é a **o
 
 Este então será o parâmetro para determinarmos qual algorítimo é mais eficiente que outro em uma comparação: o seu grau de crescimento.
 
+Quando analisamos desta maneira, estamos estudando a *eficiência assintótica* do algorítimo. Três são as notações estudadas aqui:
+
+-   Teta: Limitante assintóticamente **justo** para um *f(n)*;
+
+-   O: Limitante assintótica **superior** para uma função *f(n)*;
+
+-   Omega: Limitante assintótico **inferior** para uma função *f(n)*;
+
 ### Merge Sort
 
 Trata-se de outro algorítimo de ordenação, porém, neste caso, utilizando uma abordagem bem diferente: dividar para conquistar. Suas etapas são:
@@ -67,4 +79,13 @@ Trata-se de outro algorítimo de ordenação, porém, neste caso, utilizando uma
 2.  resolver os subproblemas mais simples de maneira recursiva (o problema base é suficientemente simples para ser resolvido por exaustão);
 
 3.  combinar as solução para então reduzir à solução do problema original.
+
+
+No caso específico do merge sort, temos então os passos:
+
+1.  Dividir a sequência de *n* elementos em duas sequências de *n/2* elementos cada,
+
+2.  ordenar as subsequências recursivamente através do *merge-sort*,
+
+3.  juntar as duas subsequências ordenadas para então produzir a solũção do problema original.
 
