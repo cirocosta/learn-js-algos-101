@@ -10,7 +10,7 @@ Estudaremos então alguns em especial.
 
 ## Ordenação
 
-Seja a sequência de entrade uma instância do problema de ordenação, temos então vários algorítimos para calcular a solução do problema (uma saída ordenada), dependendo de três aspectos:
+Seja a sequência de entrada uma instância do problema de ordenação, temos então vários algorítimos para calcular a solução do problema (uma saída ordenada), dependendo de três aspectos:
 
 -   número de valores a serem ordenados,
 
@@ -30,13 +30,12 @@ Dado um conjunto de números inteiros embaralhados contidos na lista `A[1...N]` 
 insertion-sort(A):
 
 for j <- 2 to length[A]:
-    key <- A[j]
-    insere A[j] na seq ordenada A[1... j-1]
-    i <- j-1
+    key <- A[j]                 # carta atual a ser inserida
+    i <- j-1                    # vamos entao buscar onde coloca-la
     while i > 0 and a[i] > key:
         A[i+1] <- A[i]
         i <- i-1
-    A[i+1] <- key
+    A[i+1] <- key               # coloca onde deve
 ```
 
 *ps.: J representa a carta atual a ser inserida na mão, A[1 .. j-1] as cartas já ordenadas e A[j+1 ... n] a pilha desordenada.*
@@ -47,10 +46,10 @@ Para analisar o algorítimo devemos primeiro deixar claro o que estamos buscando
 
 No caso, iremos analisar o segundo caso, supondo o consumo sequencial das instruções. Devemos entretanto nos lembrarmos que a medida do número de elementos de entrada nem sempre é algo trivial. Há casos (como neste de ordenação simples), em que a entrada pode ser representada por um número natural, enquanto em outros mais de um serão necessários (como no caso de grafos - poderíamos descrever por meio do número de ramos e vértices do mesmo).
 
-Feitas as considerações, podemos então estabelecer que: o **tempo de execução** de um algorítimo para uma dada entrada depende do número de operações primitivas ou passos executados, independemente da máquina que o executa. Desta forma, definimos então valores constantes para cada linha simples do código.
+Feitas as considerações, podemos então estabelecer que: o **tempo de execução** de um algorítimo para uma dada entrada depende do número de operações primitivas ou passos executados, independemente da máquina que o executa. Desta forma, definimos então valores constantes para cada linha simples do código (*ci*, com *i* referenciando a linha).
 
 
-**//TODO -- análise completa do tempo de execução com os c1, c2 ... etc**
+**//TODO -- colocar a resolução da análise**
 
 
 ##### Pior Caso e Caso Médio
@@ -105,11 +104,38 @@ MERGE-SORT(A, p, r):
 
 MERGE(A, lo, mid, hi):
 
+    var left = A.splice(lo, mid);
+    var right = A.splice(mid, hi);
+    var result = [];
+
+    while(left.length || right.length) {
+
+      if(left.length && right.length) {
+
+        if(left[0] < right[0]) {
+          result.push(left.shift());
+        } else {
+          result.push(right.shift());
+        }
+
+      } else if (left.length) {
+        result.push(left.shift());
+      } else {
+        result.push(right.shift());
+      }
+    }
+
+    return result;
+  }
 ```
 
-
-
 #### Análise do algorítimo
+
+
+Porém, Se tratando de um algorítimo do tipo Dividir Para Conquistar, podemos utilizar de certas generalidades para analisar sua eficiência.
+
+**//TODO colocar a resolução da análise**
+
 
 ## Algorítimos Para Grafos
 
@@ -122,8 +148,6 @@ Uma grafo é denotado por dois elementos: o número de vértices (V) e arestas (
 -   Se *G = (V,E)* é direcionado, a soma dos comprimentos de todas as listas de adjacências será *|E|* já que um ramo da forma *(u,v)* é representado de maneira que *v* aparece em ADJ[U];
 
 -   Se *G = (V,E)* não é direcionado, a soma dos comprimentos é *2|E|* já que, se *(u,v)* é um ramo do grafo, então *u* aparece na lista de adjacências de *v* e vice-versa.
-
-**//TODO terminar...**
 
 
 ### Breadth-First Search (BFS) - Busca em largura
@@ -197,7 +221,23 @@ Utilizando o que foi dito a cima pode-se então ser elucidado o teorema:
 
 #### Árvores Breadth-First
 
-**//TODO**
+O resultado do algorítimo a cima é a construção de uma árvore *Breadth-First*. Esta construção nos trás a implicação:
+
+-   *Para todo nó CV da árvore BF há um único caminho desde S até V que é um caminho mínimo de S a V*.
+
+Para mostrar de fato esse caminho, segue um algorítimo:
+
+```
+PRINT-PATH(G,s,v):
+
+    if v == s:
+        imprime(s)
+    else if pi[v] != null:
+        PRINT-PATH(G,s,pi[v])
+        imprime(v)
+    else
+        imprime ("nao existe caminho de 's' a 'v'")
+```
 
 
 ### Depth-First Search (DFS) - Busca em Profundidade
@@ -244,6 +284,40 @@ DFS_VISIT(u):
 ```
 
 #### Propriedades do DFS
+
+Após a execução do algorítimo podemos ter então diversas informações sobre a estrutura de um dado grafo.
+
+-   o subgrafo de predecessores forma uma floresta
+
+-   os instantes de descoberta e de término tem uma estrutura de parênteses (abertura e fechamento representam uma estrutura bem formada)
+
+
+
+
+
+#### Classificação dos ramos
+
+
+-   Ramos de árvores - ramos das árvores depth-first
+
+-   Ramos para trás - ramos *(u,v)* que conectam um vértice *u* a um ascendente *v*, ambos na mesma árvore depth-first
+
+-   Ramos para frente
+
+-   Ramos cruzados
+
+> **Lema**: Um grafo direcionado é acíclico se e apenas se a busca depth-first não produz ramos para trás
+
+#### Ordenação Topológica
+
+```
+TOPOLOGICAL-SORT
+
+execute DFS para calcular os instantes de termino f[v] para cada vertice
+quando um vertice termina, insira-o na frente de uma lista ligada
+retorne a lista ligada
+```
+
 
 ## Tabela de tempos assintóticos
 
