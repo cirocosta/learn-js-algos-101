@@ -6,7 +6,7 @@ O que é muito interessante no estudo de algorítimos é que mesmo que certos al
 
 Estudaremos então alguns em especial.
 
-**//TODO tabela com o resultado da análise assintótica dos algos**
+*ps.: # == |*
 
 ## Ordenação
 
@@ -91,7 +91,25 @@ No caso específico do merge sort, temos então os passos:
 
 3.  juntar as duas subsequências ordenadas para então produzir a solũção do problema original.
 
-**//TODO algorítimo merge, algorítimo merge-sort.**
+O que se traduz então no seguinte código:
+
+```
+MERGE-SORT(A, p, r):
+
+    if p < r:
+        q = floor((p+r) / 2)  # dividimos a sequência em dois
+        MERGE-SORT(A, p, q)   # ordenamos o lado esquerdo
+        MERGE-SORT(A, q+1, r) # ordenamos o lado direito
+        MERGE(A, p, q, r)     # fazemos a junção dos ordenados
+
+
+MERGE(A, lo, mid, hi):
+
+```
+
+
+
+#### Análise do algorítimo
 
 ## Algorítimos Para Grafos
 
@@ -110,7 +128,7 @@ Uma grafo é denotado por dois elementos: o número de vértices (V) e arestas (
 
 ### Breadth-First Search (BFS) - Busca em largura
 
-Seja *G = (V,E)* um grafo, direcionado ou não, e um vértice fonte *s*. O algorítimo então explora os ramos de *G* para descobrir cada vértica que é alcançável a partir do *s* definido. À medida que percorre o grafo é calculada a distância de *s* a cada um dos vértices alcançáveis, além de gerar uma árvore *breadth-first* com raíz *s* que possui todos os vértices alcançáveis.
+Seja *G = (V,E)* um grafo, **direcionado ou não**, e um vértice fonte *s*. O algorítimo então explora os ramos de *G* para descobrir cada vértica que é alcançável a partir do *s* definido. À medida que percorre o grafo é calculada a distância de *s* a cada um dos vértices alcançáveis, além de gerar uma árvore *breadth-first* com raíz *s* que possui todos os vértices alcançáveis.
 
 Dada a descrição, pode-se então subentender um problema que o algorítimo possa resolver: descobrir se há um fim alcançável a partir de um início em um túnel e qual o menor caminho até o fim caso exista.
 
@@ -151,7 +169,7 @@ BFS(G, s):
 
     # loop principal
 
-    while Q != 0:               # enquanto fila de cinzas nao vazia
+    while Q.length != 0:      # enquanto fila de cinzas nao vazia
         u = head[Q]                 # vertice atual = cabeça da fila
         for cada v in Adj[u]:       # itera sobre os adjacentes deste
             if cor[v] == branco:      # se nao visitamos ainda
@@ -164,3 +182,74 @@ BFS(G, s):
 ```
 
 #### Análise do algorítimo
+
+Cada vértice será posto (tempo constance) na fila Q no máxima uma vez e retirado (tempo constante) da fila também no máximo uma vez. Até então, tempo *O(|V|)*. Como a soma dos comprimentos de todas as listas de adjacências é *O(|E|)*, tempos então um gasto máximo de *O(|E|)*, de modo a termos, para o algorítimo completo, tempo *O(|V| + |E|)* - tempo de execução do algorítimo é linear com o tamanho das listas de adjacência.
+
+**//TODO explicar melhor**
+
+#### Caminhos Mínimos
+
+Tenhamos, por definição, que o camínho mínimo (distância mínima) entre dois nós trata-se do menor número de ramos em qualquer caminho que se estende desde um vértice até outro. Dado o procedimento BFS, este irá descobrir todos os vértices alcançáveis a partir de um *s* dado; no final de sua execução o vetor *d* conterá a distância mínima entre cada vértice e o vértice fonte (*s*); o vetor *pi* contém o pai de cada vértice no caminho do mínimo até o *s*.
+
+Utilizando o que foi dito a cima pode-se então ser elucidado o teorema:
+
+> Seja *G = (V, E)* um grafo direcionado ou não e suponha que o algorítimo BFS tenha sido executado para um dado vértice fonte *s*, então durante sua execução o algorítimos descobre todos os vértices *v* de *V* que são alcançáveis a partir de *s* e, então, após o término da execução, *d[v]* trata-se do caminho mínimo para todo *v* em *V*. Há também de se notar que para qualquer vértice *v != s* alcançável de *s*, um dos caminhos mínimos de *s* até *v* é o caminho de *s* até *pi[v]* seguido do ramo *(pi[v], v)*.
+
+#### Árvores Breadth-First
+
+**//TODO**
+
+
+### Depth-First Search (DFS) - Busca em Profundidade
+
+-   Busca tão a fundo quanto possível
+
+-   **Direcionados ou não**
+
+Seu procedimento é simples: irá buscar sempre ramos ainda não descobertos a partir do mais recentemente descoberto. Assim que chegou-se ao fim deste ramo, a busca então retrocede buscando explorar ramos a partir de outro até o fim, e assim recursivamente. Caso, no fim do algorítimo, ainda hajam vértices não descobertos, escolhe-se um novo como fonte e então repete-se o procedimento a partir da tal.
+
+Pode produzir múltiplas árvores (floresta) já que pode-se partir de diversas fontes.
+
+| símbolo |                        descrição                         |
+| ------- | -------------------------------------------------------- |
+| d       | quando um `v` é descoberto - colorido de cinza           |
+| f       | o fim do exame de sua lista de adjacências - torna preto |
+
+```
+DFS (G):
+
+    # inicialização
+
+    for vértice u in V:
+        cor[u] = branco
+        pi[u] = null
+    time = 0
+
+    # inicio procedimento principal
+
+    for vertice u in V:        # para todo vertice u em V
+        if cor[u] == branco:     # se sua cor for branca, visita o mesmo
+            DFS_VISIT(u)
+
+
+DFS_VISIT(u):
+    cor[u] = cinza          # diz que o visitou
+    d[u], time = time + 1   # anota o tempo que o visitou
+    for v in Adj[u]:        # para cada v em suas adjacencias
+        if cor[u] == branco:  # se ainda nao foi visitado
+            pi[v] = u         # anota o parante
+                DFS_VISIT(v)  # visita o mesmo
+    cor[u] = preto          # anota como visitado
+    f[u], time = time + 1;  # anota o tempo de esgotamento
+```
+
+#### Propriedades do DFS
+
+## Tabela de tempos assintóticos
+
+|    algo   |   melhor  |     pior     |
+| --------- | --------- | ------------ |
+| Insertion | *O(n)*    | *O(n^2)*     |
+| Merge     | *O(nlgn)* | *O(nlgn)*    |
+| BFS       |           | *O(#E + #V)* |
+| DFS       |           | *O(#E + #V)* |
