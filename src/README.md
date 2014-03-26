@@ -1,10 +1,12 @@
-# Algorítimo Em Automação
+# Algorítimos Em Automação
 
 > Algorítimo trata-se de um procedimento sequencial que toma um conjunto de valores como entrada e produz um outro conjunto de valores como saída. Trata-se de um procedimento computacional para se conseguir a relação entrada-saída de um problema enunciado.
 
 O que é muito interessante no estudo de algorítimos é que mesmo que certos algorítimos sejam destinados a resolver um determinado problema, sua eficiência pode divergir tremendamente, podendo ser muito mais significativo do que um hardware mais avançado.
 
 Estudaremos então alguns em especial.
+
+**//TODO tabela com o resultado da análise assintótica dos algos**
 
 ## Ordenação
 
@@ -89,6 +91,8 @@ No caso específico do merge sort, temos então os passos:
 
 3.  juntar as duas subsequências ordenadas para então produzir a solũção do problema original.
 
+**//TODO algorítimo merge, algorítimo merge-sort.**
+
 ## Algorítimos Para Grafos
 
 Ao realizarmos buscas em grafos seguimos sistematicamente os ramos de um grafo de modo a visitar seus nós, podendo então descobrir características a respeito de sua estrutura. Os algorítimos de busca são o cerne no campo de algorítimo para grafos.
@@ -101,7 +105,7 @@ Uma grafo é denotado por dois elementos: o número de vértices (V) e arestas (
 
 -   Se *G = (V,E)* não é direcionado, a soma dos comprimentos é *2|E|* já que, se *(u,v)* é um ramo do grafo, então *u* aparece na lista de adjacências de *v* e vice-versa.
 
-**//TODO termianr...**
+**//TODO terminar...**
 
 
 ### Breadth-First Search (BFS) - Busca em largura
@@ -111,3 +115,52 @@ Seja *G = (V,E)* um grafo, direcionado ou não, e um vértice fonte *s*. O algor
 Dada a descrição, pode-se então subentender um problema que o algorítimo possa resolver: descobrir se há um fim alcançável a partir de um início em um túnel e qual o menor caminho até o fim caso exista.
 
 Chama-se de BFS pois expande uniformemente a fronteira entre os vértices descobertos e os ainda não descobertos ao longo da largura da fronteira, i.e, descobre todos os vértices à distância *k* de *s* antes de descobrir qualquer outro à distância *k+1*.
+
+#### O algorítimo
+
+Há três diferentes cores para os nós de modo a indicar-se o progresso do algorítimo: branca, cinza ou preta, sendo brancos aqueles não descobertos, não-brancos os já descobertos (cinza para os descobertos mas não totalmente explorados e pretos para os já descobertos e totalmente explorados).
+
+Todos os vértices adjacentes a pretos já foram descobertos e vértices cinzas podem ter vértices adjacentes brancos e representam a fronteira entre os descobertos e não descobertos.
+
+| símbolo |             descrição              |
+| ------- | ---------------------------------- |
+| cor     | array com a cor do vértice `u`     |
+| d       | array com a distância de `u` a `s` |
+| pi      | array com o pai de `u`             |
+| Q       | o cinza atual                      |
+| s       | o source                           |
+| Adj     | lista de adjacencias de um `u`     |
+| dequeue | retira da fila                     |
+| enqueue | coloca na fila                     |
+
+
+```
+BFS(G, s):
+
+    # inicialização
+
+    for cada vertice u em {V[G] - s}:
+        cor[u] = branco
+        d[u] = inf
+        pi[u] = null
+
+    cor[s] = cinza
+    d[s] = 0
+    pi[s] = null
+    Q = s
+
+    # loop principal
+
+    while Q != 0:               # enquanto fila de cinzas nao vazia
+        u = head[Q]                 # vertice atual = cabeça da fila
+        for cada v in Adj[u]:       # itera sobre os adjacentes deste
+            if cor[v] == branco:      # se nao visitamos ainda
+                cor[v] = cinza        # dizemos que visitamos
+                d[v] = d[u] + 1       # assinalamos sua distância
+                pi[v] = u             # assinalamos seu parent
+                enqueue(Q, v)         # colocamos o novo cinza na fila
+        dequeue(Q)              # tiramos este ao fim
+        cor[u] = preto          # este foi então visitado
+```
+
+#### Análise do algorítimo
